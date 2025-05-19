@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 class User(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val userId: String,
+    val userId: Long = 0,
 
     @Column(unique = true)
     val email: String,

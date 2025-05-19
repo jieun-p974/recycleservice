@@ -18,6 +18,6 @@ class FavoriteLocation(
     @JoinColumn(name = "location_id")
     val location: RecycleLocation,
 
-    val createdDate: LocalDateTime = LocalDateTime.now()
+    val createdDte: LocalDateTime = LocalDateTime.now()
 ) {
 }

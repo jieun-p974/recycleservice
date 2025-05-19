@@ -5,7 +5,6 @@ import com.project.recycleservice.domain.repository.*
 import jakarta.annotation.PostConstruct
 import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Component
-import java.time.LocalDate
 import java.time.LocalDateTime
 
 
@@ -30,17 +29,15 @@ class Datainitializer (
         // updateDte 계정 수정일
         val users = mutableListOf<User>(
             User(
-                userId = "abc554",
-                email = "",
-                password = "",
-                nickname = "",
+                email = "abbc@aaaa.com",
+                password = "12345",
+                nickname = "abbc",
                 createdDte = LocalDateTime.of(2025,5,1,12,5),
                 updateDte = null
             ),User(
-                userId = "abx853",
-                email = "",
-                password = "",
-                nickname = "",
+                email = "iliil@aaaa.com",
+                password = "8520",
+                nickname = "iliil",
                 createdDte = LocalDateTime.of(2025,3,1,12,5),
                 updateDte = LocalDateTime.of(2025,4,22,12,5)
             ),
@@ -97,15 +94,12 @@ class Datainitializer (
         // name 물품명
         val supportedItems = mutableListOf<SupportedItem>(
             SupportedItem(
-                itemId = 1L,
                 name = "형광등"
             ),
             SupportedItem(
-                itemId = 2L,
                 name = "폐건전지"
             ),
             SupportedItem(
-                itemId = 3L,
                 name = "헌옷"
             )
         )
@@ -115,9 +109,60 @@ class Datainitializer (
         // recycleLocation
         // supportedItem
         val recycleLocationItems = mutableListOf<RecycleLocationItem>(
-
+            RecycleLocationItem(
+                location = recycleLocations[0],
+                item = supportedItems[0]
+            ),
+            RecycleLocationItem(
+                location = recycleLocations[1],
+                item = supportedItems[1]
+            )
         )
+        recycleLocationItemRepository.saveAll(recycleLocationItems)
         // FavoriteLocation 초기화
+        // favoriteId
+        // User
+        // location
+        // createdDte
+        val favoriteLocations = mutableListOf(
+            FavoriteLocation(
+                user = users[1],
+                location = recycleLocations[1],
+                createdDte = LocalDateTime.now()
+            ),
+            FavoriteLocation(
+                user = users[1],
+                location = recycleLocations[2],
+                createdDte = LocalDateTime.now()
+            )
+        )
+        favoriteLocationRepository.saveAll(favoriteLocations)
         // Review 초기화
+        // reviewId
+        // user
+        // location
+        // rating
+        // content
+        // createdDte
+        // updateDte
+        val reviews = mutableListOf(
+            Review(
+                user = users[1],
+                location = recycleLocations[0],
+                rating = 4,
+                content = "깨끗하고 찾기 쉬웠어요!",
+                createdDte = LocalDateTime.now(),
+                updateDte = LocalDateTime.now()
+            ),
+            Review(
+                user = users[0],
+                location = recycleLocations[2],
+                rating = 2,
+                content = "위치가 너무 애매해요.",
+                createdDte = LocalDateTime.now(),
+                updateDte = LocalDateTime.now()
+            )
+        )
+        reviewRepository.saveAll(reviews)
     }
 }
