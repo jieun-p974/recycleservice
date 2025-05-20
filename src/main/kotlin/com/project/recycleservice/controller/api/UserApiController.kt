@@ -1,4 +1,4 @@
-package com.project.recycleservice.controller
+package com.project.recycleservice.controller.api
 
 import com.project.recycleservice.dto.UserDto
 import com.project.recycleservice.service.UserService
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/users")
-class UserController (
+class UserApiController (
     private val userService: UserService
 ){
     @GetMapping
