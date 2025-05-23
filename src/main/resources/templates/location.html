@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- include header -->
+<th:block th:replace="fragments/header :: fragment"></th:block>
+
+<!-- include menu -->
+<th:block th:replace="fragments/menu :: fragment"></th:block>
+<body class="container py-5">
+
+<h2 class="mb-4">📍 우리동네 분리수거함 목록</h2>
+
+<table class="table table-bordered">
+  <thead class="table-light">
+  <tr>
+    <th>장소명</th>
+    <th>주소</th>
+    <th>카테고리</th>
+    <th>연락처</th>
+    <th>조회수</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="loc : ${locations}">
+    <td th:text="${loc.name}"></td>
+    <td th:text="${loc.address}"></td>
+    <td th:text="${loc.category}"></td>
+    <td th:text="${loc.phone}"></td>
+    <td th:text="${loc.views}"></td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+<!-- include footer -->
+<th:block th:replace="fragments/footer :: fragment"></th:block>
+</html>
