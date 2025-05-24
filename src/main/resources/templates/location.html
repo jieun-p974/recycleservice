@@ -1,11 +1,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <!-- include header -->
 <th:block th:replace="fragments/header :: fragment"></th:block>
-
+<th:block th:replace="fragments/header :: body"></th:block>
 <!-- include menu -->
 <th:block th:replace="fragments/menu :: fragment"></th:block>
 
-<body class="container py-5">
 
 <h2 class="mb-4">📍 우리동네 분리수거함 목록</h2>
 
@@ -30,7 +29,6 @@
   </tbody>
 </table>
 
-</body>
 <!-- include footer -->
 <th:block th:replace="fragments/footer :: fragment"></th:block>
 </html>
