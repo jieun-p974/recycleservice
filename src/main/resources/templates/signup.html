@@ -1,11 +1,11 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>회원가입</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+<!-- include header -->
+<th:block th:replace="fragments/header :: fragment"></th:block>
+
+<!-- include menu -->
+<th:block th:replace="fragments/menu :: fragment"></th:block>
+
+<body class="container py-5">
 <h1>회원가입</h1>
 <form th:action="@{/signup}" th:object="${user}" method="post">
     <label>이메일: <input type="email" th:field="*{email}" required/></label><br/>
@@ -14,4 +14,6 @@
     <button type="submit">가입하기</button>
 </form>
 </body>
+<!-- include footer -->
+<th:block th:replace="fragments/footer :: fragment"></th:block>
 </html>
