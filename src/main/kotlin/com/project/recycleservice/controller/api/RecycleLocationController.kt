@@ -32,7 +32,7 @@ class RecycleLocationController(
         }
     }
 
-    @GetMapping("/{locationId}") // 해당 수거함 상세  + ㅇ
+    @GetMapping("/{locationId}") // 해당 수거함 상세
     fun getById(@PathVariable locationId: Long): Map<String, Any>{
         val location = locationRepository.findById(locationId).orElseThrow()
         val views = locationViewService.increaseViewCount(locationId)

@@ -24,4 +24,5 @@ class UserPageController (
         model.addAttribute("nickname", user.nickname)
         return "signup-success"
     }
+
 }

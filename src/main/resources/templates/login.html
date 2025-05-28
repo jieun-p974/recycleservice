@@ -1,0 +1,40 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- include header -->
+<th:block th:replace="fragments/header :: fragment"></th:block>
+<th:block th:replace="fragments/header :: body"></th:block>
+<!-- include menu -->
+<nav th:replace="fragments/menu :: fragment"></nav>
+
+<!-- 메인 콘텐츠 -->
+<div class="my-3">
+  <h1 class="text-center">로그인</h1>
+  <div class="row justify-content-center">
+    <div class="col-md-6 p-5">
+      <form th:action="@{/login}" th:object="${loginDto}" method="post">
+        <div class="mb-3">
+          <label class="form-label" for="email">이메일</label>
+          <input id="email" type="email" class="form-control form-control-lg" th:field="*{email}" required/>
+        </div>
+        <div class="mb-3">
+          <label class="form-label" for="password">비밀번호</label>
+          <input id="password" type="password" class="form-control form-control-lg" th:field="*{password}" required/>
+        </div>
+        <div th:if="${loginError}" class="text-danger">이메일 또는 비밀번호가 틀렸습니다.</div>
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-dark btn-lg">로그인</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="justify-content-center">
+    <ul>
+      <li>비밀번호 찾기</li>
+      <li>아이디 찾기</li>
+      <li><a th:href="@{/signup}">회원가입</a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- include footer -->
+<th:block th:replace="fragments/footer :: fragment"></th:block>
+</html>

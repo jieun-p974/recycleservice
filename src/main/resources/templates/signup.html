@@ -3,15 +3,29 @@
 <th:block th:replace="fragments/header :: fragment"></th:block>
 <th:block th:replace="fragments/header :: body"></th:block>
 <!-- include menu -->
-<th:block th:replace="fragments/menu :: fragment"></th:block>
+<nav th:replace="fragments/menu :: fragment"></nav>
 
-<h1>회원가입</h1>
-<form th:action="@{/signup}" th:object="${user}" method="post">
-    <label>이메일: <input type="email" th:field="*{email}" required/></label><br/>
-    <label>비밀번호: <input type="password" th:field="*{password}" required/></label><br/>
-    <label>닉네임: <input type="text" th:field="*{nickname}" required/></label><br/>
-    <button type="submit">가입하기</button>
-</form>
+<h1 class="text-center my-3">회원가입</h1>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 p-5">
+            <form th:action="@{/signup}" th:object="${user}" method="post">
+                <div class="mb-3">
+                    <label class="form-label">이메일<input type="email" class="form-control form-control-lg" th:field="*{email}" required/></label>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">비밀번호<input type="password" class="form-control form-control-lg" th:field="*{password}" required/></label>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">닉네임<input type="text" class="form-control form-control-lg" th:field="*{nickname}" required/></label>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-dark btn-lg">가입하기</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <!-- include footer -->
 <th:block th:replace="fragments/footer :: fragment"></th:block>

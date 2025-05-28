@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service
 class LocationViewService (
     private val redisTemplate: RedisTemplate<String, String>
 ){
+    // 조회수 증가
     fun increaseViewCount(locationId: Long): Long{
         val key = "views:location:$locationId"
         return  redisTemplate.opsForValue().increment(key) ?: 1

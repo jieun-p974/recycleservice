@@ -1,4 +1,3 @@
-<body class="container py-5">
 <div th:fragment="fragment">
     <div class="container-fluid">
         <div class="row py-3 border-bottom justify-content-between">
@@ -19,8 +18,11 @@
                         <ul class="navbar-nav justify-content-end menu-list list-unstyled d-flex gap-md-3 mb-0">
                             <li class="nav-item"><a class="nav-link" th:href="@{/signup}">회원가입</a></li>
                             <li class="nav-item"><a class="nav-link" th:href="@{/locations}">수거함 찾기</a></li>
-                            <li class="nav-item"><a class="nav-link" th:href="@{/reviews}">후기 보기</a></li>
+                            <!--<li class="nav-item"><a class="nav-link" th:href="@{/reviews}">후기 보기</a></li>-->
                             <li class="nav-item"><a class="nav-link" th:href="@{/favorites}">즐겨찾기</a></li>
+                            <li class="nav-item" th:if="${loginUser == null}"><a class="nav-link" th:href="@{/login}">로그인</a></li>
+                            <li class="nav-item" th:if="${loginUser != null}"><a class="nav-link" th:href="@{/logout}">로그아웃</a></li>
+                            <!--<li class="nav-item" th:if="${loginUser != null}"><p th:text="'로그인된 사용자: ' + ${loginUser.nickname}"></p></li>-->
                         </ul>
                     </div>
                 </div>

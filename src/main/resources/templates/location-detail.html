@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- include header -->
+<th:block th:replace="fragments/header :: fragment"></th:block>
+<th:block th:replace="fragments/header :: body"></th:block>
+<!-- include menu -->
+<nav th:replace="fragments/menu :: fragment"></nav>
+
+<div>
+  <h2 class="my-3">📍 우리동네 분리수거함 상세</h2>
+
+  <table class="table table-bordered">
+    <thead class="table-light">
+    <tr>
+      <th>장소명</th>
+      <th>주소</th>
+      <th>카테고리</th>
+      <th>연락처</th>
+      <th>조회수</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td th:text="${location.name}"></td>
+      <td th:text="${location.address}"></td>
+      <td th:text="${location.category}"></td>
+      <td th:text="${location.phoneNumber}"></td>
+      <td th:text="${views}"></td>
+    </tr>
+    </tbody>
+  </table>
+  <hr />
+  <h3>리뷰</h3>
+  <ul>
+    <li th:each="rw : ${reviews}">
+      <strong th:text="${rw.user.nickname}">닉네임</strong> : <span th:text="${rw.content}"></span>
+    </li>
+  </ul>
+  <hr />
+  <div>
+    <span th:if="${isFavorite}">★ 즐겨찾기 등록됨</span>
+    <span th:if="${!isFavorite}">☆ 즐겨찾기 안됨</span>
+  </div>
+</div>
+
+
+
+<!-- include footer -->
+<th:block th:replace="fragments/footer :: fragment"></th:block>
+</html>

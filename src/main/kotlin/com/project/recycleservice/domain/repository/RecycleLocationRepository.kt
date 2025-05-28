@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository
 @Repository
 interface RecycleLocationRepository : JpaRepository<RecycleLocation, Long> {
     fun findByCategory(category: String): List<RecycleLocation>
-    //fun findByAddressContaining(address: String): List<RecycleLocation>
+    fun findByAddressContaining(address: String): List<RecycleLocation>
+    fun findByCategoryAndAddressContaining(category: String, address: String): List<RecycleLocation>
 }

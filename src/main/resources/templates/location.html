@@ -3,11 +3,26 @@
 <th:block th:replace="fragments/header :: fragment"></th:block>
 <th:block th:replace="fragments/header :: body"></th:block>
 <!-- include menu -->
-<th:block th:replace="fragments/menu :: fragment"></th:block>
+<nav th:replace="fragments/menu :: fragment"></nav>
 
 
-<h2 class="mb-4">📍 우리동네 분리수거함 목록</h2>
+<h2 class="my-3 text-center">📍 우리동네 분리수거함 목록</h2>
 
+<form method="get" action="/locations" class="mb-3 d-flex gap-2 align-items-center">
+  <select name="category" class="form-select" style="max-width: 200px;">
+    <option value="" th:selected="${category == null or category == ''}">전체 카테고리</option>
+    <option th:each="c : ${categories}"
+            th:value="${c}"
+            th:text="${c}"
+            th:selected="${category == c}">
+    </option>
+  </select>
+
+  <input type="text" name="address" class="form-control" placeholder="주소 입력"
+         th:value="${address}" style="max-width: 300px;"/>
+
+  <button type="submit" class="btn btn-primary">검색</button>
+</form>
 <table class="table table-bordered">
   <thead class="table-light">
   <tr>
@@ -19,7 +34,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr th:each="loc : ${locations}">
+  <tr th:each="loc : ${locations}" th:onClick="|window.location='/locations/${loc.locationId}'|" style="cursor:pointer;">
     <td th:text="${loc.name}"></td>
     <td th:text="${loc.address}"></td>
     <td th:text="${loc.category}"></td>
@@ -28,7 +43,53 @@
   </tr>
   </tbody>
 </table>
+<div id="map" style="width:100%;height:500px;"></div>
 
+<script th:inline="javascript">
+  const locations = [[${locations}]];
+
+  var map = new naver.maps.Map('map', {
+      center: new naver.maps.LatLng(37.5665, 126.9780),
+      zoom: 10
+  });
+
+  locations.forEach(loc => {
+      const marker = new naver.maps.Marker({
+          position: new naver.maps.LatLng(loc.latitude, loc.longitude),
+          map: map,
+          title: loc.name
+      });
+
+      const infoWindow = new naver.maps.InfoWindow({
+          content: `<div style="padding:10px;">${loc.name}</div>`
+      });
+
+      naver.maps.Event.addListener(marker, 'click', () => {
+          infoWindow.open(map, marker);
+      });
+  });
+</script>
+<script>
+  if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+
+          new naver.maps.Marker({
+              position: new naver.maps.LatLng(lat, lon),
+              map: map,
+              title: '내 위치',
+              icon: {
+                  content: `<div style="background:red;width:15px;height:15px;border-radius:50%;"></div>`,
+                  size: new naver.maps.Size(20, 20),
+                  anchor: new naver.maps.Point(10, 10)
+              }
+          });
+
+          map.setCenter(new naver.maps.LatLng(lat, lon));
+      });
+  }
+</script>
 <!-- include footer -->
 <th:block th:replace="fragments/footer :: fragment"></th:block>
 </html>
